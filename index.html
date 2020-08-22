@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' * blob: data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src  'self' 'unsafe-inline' 'unsafe-eval' blob: data: *; 
+            style-src   'self' 'unsafe-inline' *">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Language Toggle Experiment</title>
+        <style>
+            body.spanish .spanish{
+                display :block;
+            }
+            body.spanish .english{
+                display:none;
+            }
+
+            body.english .english{
+                display:block;
+            }
+            body.english .spanish{
+                display:none;
+            }
+        </style>
+    </head>
+
+    <body class="english">
+        <select id="language_select">
+            <option value="english">English Please</option>
+            <option value="spanish">Spanish Please</option>
+        </select>
+        <div>
+            <div id="introduction">
+                <p class="english">
+                    Box2D of course knows when and how each body and fixture is contacting other bodies and fixtures, but so far we haven't reacted to these events nor done anything interesting. Luckily, there is an easy way to be notified when two bodies contact each other, when they stop contacting, and even how much impulse is felt by the bodies. We will explore these concepts in this blog post.
+                </p>
+                <p class="spanish">
+                    Box2D, por supuesto, sabe cuándo y cómo cada cuerpo y dispositivo está en contacto con otros cuerpos y dispositivos, pero hasta ahora no hemos reaccionado a estos eventos ni hemos hecho nada interesante. Afortunadamente, existe una manera fácil de ser notificado cuando dos cuerpos se contactan, cuando dejan de hacerlo e incluso cuánto impulso sienten los cuerpos. Exploraremos estos conceptos en esta publicación de blog.
+                </p>
+            </div>
+            <div id="example">
+                <p class="english">
+                    For example, if you have a ball rolling across the ground, this creates an impulse (albeit tiny) for every frame, and PostSolve() will be fired every frame. If you have other objects touching the ground, those objects will feel an impulse from the ground (which is "rumbled" by the ball rolling.)
+                </p>
+                <p class="spanish">
+                    Por ejemplo, si tiene una bola rodando por el suelo, esto crea un impulso (aunque pequeño) para cada fotograma, y ​​PostSolve () se disparará en cada fotograma. Si tiene otros objetos tocando el suelo, esos objetos sentirán un impulso desde el suelo (que es "retumbado" por la bola rodando).
+                </p>
+            </div>
+        </div>
+
+        <script>
+            var language_select = document.querySelector("#language_select");
+                language_select.addEventListener("change", e=> toggle(e), false);
+
+            function toggle(e){
+                console.log(e.target);//the select is the target of this 'change' event
+                var lang = e.target.value; //get the options value (ENGLISH OR SPANISH)
+                document.body.classList.remove("english");//if english there, remove it
+                document.body.classList.remove("spanish");//if spanish there, remove it
+                document.body.classList.add(lang);//now add whatever they chose
+            }
+        </script>
+    </body>
+</html>
